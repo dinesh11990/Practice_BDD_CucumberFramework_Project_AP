@@ -1,4 +1,4 @@
-package com.krish.utilities;
+ package com.krish.utilities;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,8 +17,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import com.krish.constants.Constants;
-
-import com.krish.page_objects.LoginPageObjects;
+import com.krish.page_objects.LoginPage;
 import com.krish.webdriver_manager.DriverManagers;
 
 
@@ -69,9 +68,41 @@ public class CommonUtils {
 }
 	public void initWebElements() {
 		
-		PageFactory.initElements(DriverManagers.getDriver(), LoginPageObjects.getInstance());
+		PageFactory.initElements(DriverManagers.getDriver(), LoginPage.getInstance());
 		
 		
+	}
+	
+	public void selectFromDropDown(WebElement dropDown, String howTo, String value) {
+		
+		Select select = new Select(dropDown);
+		
+		switch (howTo) {
+		
+		case "index":
+			
+			select.selectByIndex(Integer.parseInt(value));
+			
+			break;
+			
+		case "value":
+			
+			select.selectByValue(value);
+			
+			break;
+			
+		case "text":
+			
+			select.selectByVisibleText(value);
+	
+			break;
+
+		default:
+			
+			System.out.println("Please provide valid selection");
+			
+			break;
+		}
 	}
 }
 
